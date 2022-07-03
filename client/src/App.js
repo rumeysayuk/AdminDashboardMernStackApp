@@ -4,14 +4,15 @@ import {TooltipComponent} from "@syncfusion/ej2-react-popups";
 import {FiSettings} from "react-icons/fi";
 import {Navbar, Sidebar} from "./components";
 import {
-   Area, Calendar,Ecommerce,ColorMapping, ColorPicker, Customers, Editor, Employees,
+   Area, Calendar, Ecommerce, ColorMapping, ColorPicker, Customers, Editor, Employees,
    Financial, Kanban, Line, Orders, Pie, Pyramid, Stacked
 } from "./pages";
 import {useStateContext} from "./contexts/ContextProvider";
 
 import "./App.css"
+
 const App = () => {
-   const {activeMenu}=useStateContext()
+   const {activeMenu} = useStateContext()
    return (
       <div>
          <BrowserRouter>
@@ -31,31 +32,32 @@ const App = () => {
                )}
                <div
                   className={`dark:bg-main-bg bg-main-bg min-h-screen md:ml-72 w-full ${activeMenu ? "md:ml-72" : "flex-2"}`}>
-                  <div className={"fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full"}><Navbar/></div>
-               </div>
-               <div>
-                  <Routes>
-                     {/*    Dashboard    */}
-                     <Route path={"/"} element={<Ecommerce/>}/>
-                     <Route path={"/ecommerce"} element={<Ecommerce/>}/>
-                     {/*    Pages    */}
-                     <Route path={"/orders"} element={<Orders/>}/>
-                     <Route path={"/employees"} element={<Employees/>}/>
-                     <Route path={"/customers"} element={<Customers/>}/>
-                     {/*    Apps    */}
-                     <Route path={"/kanban"} element={<Kanban/>}/>
-                     <Route path={"/editor"} element={<Editor/>}/>
-                     <Route path={"/calendar"} element={<Calendar/>}/>
-                     <Route path={"/color-picker"} element={<ColorPicker/>}/>
-                     {/*    Charts    */}
-                     <Route path={"/line"} element={<Line/>}/>
-                     <Route path={"/area"} element={<Area/>}/>
-                     <Route path={"/pie"} element={<Pie/>}/>
-                     <Route path={"/financial"} element={<Financial/>}/>
-                     <Route path={"/color-mapping"} element={<ColorMapping/>}/>
-                     <Route path={"/pyramid"} element={<Pyramid/>}/>
-                     <Route path={"/stacked"} element={<Stacked/>}/>
-                  </Routes>
+                  <div className={"fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full"}><Navbar/>
+                  </div>
+                  <div>
+                     <Routes>
+                        {/*    Dashboard    */}
+                        <Route path={"/"} element={<Ecommerce/>}/>
+                        <Route path={"/ecommerce"} element={<Ecommerce/>}/>
+                        {/*    Pages    */}
+                        <Route path={"/orders"} element={<Orders/>}/>
+                        <Route path={"/employees"} element={<Employees/>}/>
+                        <Route path={"/customers"} element={<Customers/>}/>
+                        {/*    Apps    */}
+                        <Route path={"/kanban"} element={<Kanban/>}/>
+                        <Route path={"/editor"} element={<Editor/>}/>
+                        <Route path={"/calendar"} element={<Calendar/>}/>
+                        <Route path={"/color-picker"} element={<ColorPicker/>}/>
+                        {/*    Charts    */}
+                        <Route path={"/line"} element={<Line/>}/>
+                        <Route path={"/area"} element={<Area/>}/>
+                        <Route path={"/pie"} element={<Pie/>}/>
+                        <Route path={"/financial"} element={<Financial/>}/>
+                        <Route path={"/color-mapping"} element={<ColorMapping/>}/>
+                        <Route path={"/pyramid"} element={<Pyramid/>}/>
+                        <Route path={"/stacked"} element={<Stacked/>}/>
+                     </Routes>
+                  </div>
                </div>
             </div>
          </BrowserRouter>
