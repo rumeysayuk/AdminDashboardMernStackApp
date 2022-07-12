@@ -7,6 +7,9 @@ import {
 import {customersData, customersGrid} from "../data/dummy";
 
 const Customers = () => {
+   const selectionsettings = { persistSelection: true };
+   const toolbarOptions = ['Delete'];
+   const editing = { allowDeleting: true, allowEditing: true };
    return (
       <div className={"mt-2 md:m-10 p-2 md:p-10  bg-white rounded-3xl"}>
          <Header category={"Page"} title={"Customers"}/>
