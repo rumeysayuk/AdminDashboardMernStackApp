@@ -6,7 +6,7 @@ const initialState = {chat: false, cart: false, userProfile: false, notification
 
 export const ContextProvider = ({children}) => {
    const [screenSize, setScreenSize] = useState(undefined);
-   const [currentColor, setCurrentColor] = useState('blueViolet');
+   const [currentColor, setCurrentColor] = useState('#8a2be2');
    const [currentMode, setCurrentMode] = useState('Light');
    const [themeSettings, setThemeSettings] = useState(false);
    const [activeMenu, setActiveMenu] = useState(true);

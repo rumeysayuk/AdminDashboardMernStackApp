@@ -8,11 +8,12 @@ import {ordersData, ordersGrid, contextMenuItems} from "../data/dummy";
 
 const Orders = () => {
    const editing = {allowDeleting: true, allowEditing: true};
+   const toolbarOptions = ['Search', 'Delete'];
    return (
       <div className={"mt-2 md:m-10 p-2 md:p-10  bg-white rounded-3xl"}>
          <Header category={"Page"} title={"Orders"}/>
          <GridComponent id={"gridcomp"} dataSource={ordersData} allowPaging allowSorting allowExcelExport allowPdfExport
-                        contextMenuItems={contextMenuItems} editSettings={editing}>
+                        contextMenuItems={contextMenuItems} editSettings={editing} toolbar={toolbarOptions}>
             <ColumnsDirective>
                {ordersGrid.map((item, i) => (<ColumnDirective key={i} {...item}/>))}
             </ColumnsDirective>
