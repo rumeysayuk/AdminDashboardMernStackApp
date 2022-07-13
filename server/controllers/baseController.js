@@ -8,12 +8,12 @@ const create = asyncErrorWrapper(async (req, res, next) => {
    try {
       service = require("../models/" + service)
    } catch (e) {
-      return next(new CustomError("Wrong service name", 400))
+      return next(new CustomError(getMessageFromFile(req, next, "INCORRECT_SERVICE_NAME"), 400))
    }
    let {data} = req.body
-   if (!data) return next(new CustomError("Please send the record to be added with the data name ..!", 400))
-   let createdData = await service.create({...data, createdBy: user._id})
-   return res.status(200).json({data: createdData, success: true})
+   if (!data) return next(new CustomError(getMessageFromFile(req, next, "EDIT_DATA_VALID_FORM"), 400))
+   let created = await service.create({...data, createdBy: user._id})
+   return res.status(200).json({created, success: true})
 })
 
 const update = asyncErrorWrapper(async (req, res, next) => {
