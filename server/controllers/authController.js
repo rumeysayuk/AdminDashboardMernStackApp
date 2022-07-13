@@ -1,6 +1,9 @@
 const asyncErrorWrapper = require("express-async-handler")
 const CustomError = require("../helpers/error/CustomError")
 const User = require("../models/User")
+const {sendJwtToClient} = require("../helpers/authorization/tokenHelpers");
+const {EMAIL_UNIQUE_ERROR} = require("../constants/messages/messages");
+const bcrypt = require("bcryptjs")
 
 const login = asyncErrorWrapper(async (req, res, next) => {
    const {email, password} = req.body
@@ -11,3 +14,13 @@ const login = asyncErrorWrapper(async (req, res, next) => {
    if (!bcrypt.compareSync(password, user.password)) return next(new CustomError("Invalid credentials", 400));
    sendJwtToClient(user, res, (user.role === "admin" ? true : false));
 })
+
+const register = asyncErrorWrapper(async (req, res, next) => {
+   let oldUser = await User.findOne({email: (req.body.email || "").trim()})
+   if (oldUser) return next(new CustomError(EMAIL_UNIQUE_ERROR, 400))
+   req.body.email = (req.body.email || "").trim()
+   req.body.password = (req.body.password || "").trim()
+   const user = await User.create({...req.body});
+   sendJwtToClient(user, res);
+})
+module.exports = {login, register}

@@ -11,7 +11,7 @@ const UserSchema = new Schema({
       type: String,
       required: [true, requiredError("Name")],
    },
-   surname: {
+   lastname: {
       type: String,
       required: [true, requiredError("Lastname")],
    },
