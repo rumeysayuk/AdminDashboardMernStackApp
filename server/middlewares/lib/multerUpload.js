@@ -16,8 +16,8 @@ const fileFilter = (req, file, cb) => {
 const storage = multer.diskStorage({
    destination: function (req, file, cb) {
       const rootDir = path.dirname(require.main.filename);
-      fs.mkdirSync(path.join(rootDir, "/public"), {recursive: true})
-      cb(null, path.join(rootDir, "/public"));
+      fs.mkdirSync(path.join(rootDir, "/public/images"), {recursive: true})
+      cb(null, path.join(rootDir, "/public/images"));
    },
    filename: function (req, file, cb) {
       const extension = file.mimetype.split("/")[1];

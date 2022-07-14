@@ -6,10 +6,16 @@ const router = express.Router();
 const upload = require("../middlewares/lib/multerUpload")
 const pdfUpload = require("../middlewares/lib/pdfUpload");
 
-router.use("/upload", upload.array("images"), (req, res, next) => {
+router.use("/upload", upload.single("image"), (req, res, next) => {
+   res.status(200).json({
+      url: (req.savedImages || []).map(image => process.env.HOST + "/" + image),
+      message: "Image upload successfully",
+   })
+})
+router.use("/multiupload", upload.array("images"), (req, res, next) => {
    res.status(200).json({
       urls: (req.savedImages || []).map(image => process.env.HOST + "/" + image),
-      message: "Image upload successfully",
+      message: "Images upload successfully",
    })
 })
 router.use("/pdfupload", pdfUpload.single("file"), (req, res, next) => {
