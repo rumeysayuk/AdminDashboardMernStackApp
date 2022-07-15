@@ -6,7 +6,7 @@ const {EMAIL_UNIQUE_ERROR} = require("../constants/messages/messages");
 const bcrypt = require("bcryptjs")
 
 const login = asyncErrorWrapper(async (req, res, next) => {
-   const {email, password} = req.body
+   const {email, password, confirmPassword} = req.body
    if (!(email && password)) return next(new CustomError("Email or password is required", 400))
    const user = await User.findOne({$or: [{email: email}]}).select("+password")
    if (!user) return next(new CustomError("User not found", 400))
@@ -16,8 +16,10 @@ const login = asyncErrorWrapper(async (req, res, next) => {
 })
 
 const register = asyncErrorWrapper(async (req, res, next) => {
+   const {password, confirmPassword} = req.body
    let oldUser = await User.findOne({email: (req.body.email || "").trim()})
    if (oldUser) return next(new CustomError(EMAIL_UNIQUE_ERROR, 400))
+   if (password !== confirmPassword) return res.status(400).json({message: "Passwords don't match !"})
    req.body.email = (req.body.email || "").trim()
    req.body.password = (req.body.password || "").trim()
    const user = await User.create({...req.body});

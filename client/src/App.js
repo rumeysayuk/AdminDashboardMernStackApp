@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import {FiSettings} from 'react-icons/fi';
 import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 
-import {Navbar, Footer, Sidebar, ThemeSettings} from './components';
+import {Navbar, Footer, Sidebar, ThemeSettings, Auth} from './components';
 import {
    Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban,
    Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor
@@ -16,6 +16,7 @@ const App = () => {
    const {
       setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings
    } = useStateContext();
+   const user = JSON.parse(localStorage.getItem("profile"))
 
    useEffect(() => {
       const currentThemeColor = localStorage.getItem('colorMode');
@@ -57,6 +58,8 @@ const App = () => {
                   <div>
                      {themeSettings && (<ThemeSettings/>)}
                      <Routes>
+                        {/*auth*/}
+                        <Route path="/auth" element={(!user ? <Auth/> : <Navigate to={"/"}/>)}/>
                         {/* dashboard  */}
                         <Route path="/" element={(<Ecommerce/>)}/>
                         <Route path="/ecommerce" element={(<Ecommerce/>)}/>
