@@ -6,15 +6,20 @@ export const layoutSlice = createSlice({
       authData: localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null
    },
    reducers: {
-      setAuthData: (state, action) => {
+      handleAuth: (state, action) => {
          localStorage.setItem("profile", JSON.stringify(action.payload))
          state.authData = action.payload
-      }
+      },
+      handleLogout: (state, action) => {
+         localStorage.clear()
+         state.authData = null
+      },
    }
 })
 
 export const {
-   setAuthData,
+   handleAuth,
+   handleLogout
 } = layoutSlice.actions
 
 export default layoutSlice.reducer

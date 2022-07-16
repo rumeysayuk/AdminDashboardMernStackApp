@@ -8,7 +8,7 @@ import Input from "./Input";
 import Icon from "./icon";
 import {useNavigate} from "react-router-dom";
 import * as api from "../../api/index"
-import {setAuthData} from "../../redux/auth";
+import {handleAuth} from "../../redux/auth";
 
 const initialState = {name: "", lastname: "", email: "", password: "", confirmPassword: ""}
 const Auth = () => {
@@ -23,12 +23,12 @@ const Auth = () => {
       e.preventDefault()
       if (isSignup) {
          api.register(formData).then(({data}) => {
-            dispatch(setAuthData(data))
+            dispatch(handleAuth(data))
             navigate("/")
          })
       } else {
          api.login(formData).then(({data}) => {
-            dispatch(setAuthData(data))
+            dispatch(handleAuth(data))
             navigate("/")
          })
       }
