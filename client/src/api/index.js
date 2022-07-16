@@ -1,14 +1,33 @@
 import axios from "axios"
-// import * as queryString from "querystring";
+import {toast} from "react-toastify"
 
-const API = axios.create({baseURL: process.env.REACT_APP_BASE_API_URI})
-API.interceptors.request.use((req) => {
-   if (localStorage.getItem("profile")) {
-      req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`
-   }
-   return req
+const apiAxios = axios.create({
+   baseURL: process.env.REACT_APP_BASE_API_URI
 })
 
-export const login = (formData) => API.post(`/auth/login`, formData)
+apiAxios.interceptors.request.use((req) => {
+   const token = localStorage.getItem("token");
+   if (token) {
+      req.headers.Authorization = `Bearer ${token}`;
+   }
+   return req;
+});
 
-export const register = (formData) => API.post(`/auth/register`, formData)
+apiAxios.interceptors.response.use((response) => response, (error) => {
+   if (error?.response?.data?.message) {
+      toast.error(error.response.data.message)
+   } else {
+      toast.error("Please try again later!")
+   }
+   const unauthorized = error.response && error.response.status
+      && (error.response.status === 401 || error.response.status === 403)
+   if (unauthorized) {
+      localStorage.removeItem("token")
+      setTimeout(() => {
+         window.location.replace(`${window.location.origin}/auth/login`)
+      }, 1000)
+   }
+   return Promise.reject(error)
+})
+
+export default apiAxios

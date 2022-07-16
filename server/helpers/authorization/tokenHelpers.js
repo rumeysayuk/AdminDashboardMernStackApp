@@ -4,7 +4,6 @@ const sendJwtToClient = (user, res, admin) => {
       .status(200)
       .json({
          admin,
-         user,
          access_token: token
       });
 };

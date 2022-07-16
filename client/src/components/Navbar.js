@@ -8,7 +8,10 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 import avatar from '../data/avatar.jpg';
 import {Cart, Chat, Notification, UserProfile} from '.';
 import {useStateContext} from '../contexts/ContextProvider';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import apiAxios from "../api/index"
+import {handleAuth} from "../redux/auth";
+
 
 const NavButton = ({title, customFunc, icon, color, dotColor}) => (
    <TooltipComponent content={title} position="BottomCenter">
@@ -25,7 +28,9 @@ const Navbar = () => {
       currentColor, activeMenu, setActiveMenu, handleClick,
       isClicked, setScreenSize, screenSize
    } = useStateContext();
+   const dispatch = useDispatch()
    const {authData} = useSelector((state) => state?.auth)
+
    useEffect(() => {
       const handleResize = () => setScreenSize(window.innerWidth);
 
@@ -66,7 +71,7 @@ const Navbar = () => {
                   <p>
                      <span className="text-gray-400 text-14">Hi,</span>{' '}
                      <span className="text-gray-400 font-bold ml-1 text-14">
-                {authData?.user.name}
+                Michael
               </span>
                   </p>
                   <MdKeyboardArrowDown className="text-gray-400 text-14"/>

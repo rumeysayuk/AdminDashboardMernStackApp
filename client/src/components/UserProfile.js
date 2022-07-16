@@ -4,13 +4,11 @@ import {Button} from '.';
 import {userProfileData} from '../data/dummy';
 import {useStateContext} from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
-import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
-import {handleLogout} from "../redux/auth";
+import {useSelector} from "react-redux";
 
 const UserProfile = () => {
    const {currentColor} = useStateContext();
-
+   const {authData} = useSelector((state) => state?.auth)
 
    return (
       <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">

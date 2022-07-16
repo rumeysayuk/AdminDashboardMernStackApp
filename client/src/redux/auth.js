@@ -3,11 +3,14 @@ import {createSlice} from '@reduxjs/toolkit'
 export const layoutSlice = createSlice({
    name: 'auth',
    initialState: {
-      authData: localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null
+      authData: null,
+      token: localStorage.getItem("token") ? localStorage.getItem("token") : null
    },
    reducers: {
       handleAuth: (state, action) => {
+         console.log(state,action)
          localStorage.setItem("profile", JSON.stringify(action.payload))
+         localStorage.setItem("token", action.payload.access_token)
          state.authData = action.payload
       },
       handleLogout: (state, action) => {

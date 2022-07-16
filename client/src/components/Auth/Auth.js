@@ -9,6 +9,8 @@ import Icon from "./icon";
 import {useNavigate} from "react-router-dom";
 import * as api from "../../api/index"
 import {handleAuth} from "../../redux/auth";
+import apiAxios from "../../api/index";
+import {toast} from "react-toastify";
 
 const initialState = {name: "", lastname: "", email: "", password: "", confirmPassword: ""}
 const Auth = () => {
@@ -22,12 +24,13 @@ const Auth = () => {
    const handleSubmit = (e) => {
       e.preventDefault()
       if (isSignup) {
-         api.register(formData).then(({data}) => {
-            dispatch(handleAuth(data))
+         apiAxios.post("/auth/register", formData).then(({data}) => {
+            dispatch(handleAuth({token: data.access_token}))
             navigate("/")
          })
       } else {
-         api.login(formData).then(({data}) => {
+         apiAxios.post("/auth/login", formData).then(({data}) => {
+            console.log(data)
             dispatch(handleAuth(data))
             navigate("/")
          })
