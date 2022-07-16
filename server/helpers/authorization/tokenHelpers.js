@@ -3,8 +3,8 @@ const sendJwtToClient = (user, res, admin) => {
    return res
       .status(200)
       .json({
-         success: true,
          admin,
+         user,
          access_token: token
       });
 };

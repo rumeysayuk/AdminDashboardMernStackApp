@@ -6,8 +6,9 @@ import {Avatar, Button, Container, Grid, Paper, Typography} from "@material-ui/c
 import {LockOutlined} from "@material-ui/icons";
 import Input from "./Input";
 import Icon from "./icon";
-import {login, register} from "../../store/actions/auth";
-import {useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import * as api from "../../api/index"
+import {setAuthData} from "../../redux/auth";
 
 const initialState = {name: "", lastname: "", email: "", password: "", confirmPassword: ""}
 const Auth = () => {
@@ -21,9 +22,15 @@ const Auth = () => {
    const handleSubmit = (e) => {
       e.preventDefault()
       if (isSignup) {
-         dispatch(register(formData, navigate))
+         api.register(formData).then(({data}) => {
+            dispatch(setAuthData(data))
+            navigate("/")
+         })
       } else {
-         dispatch(login(formData, navigate))
+         api.login(formData).then(({data}) => {
+            dispatch(setAuthData(data))
+            navigate("/")
+         })
       }
    }
    const handleChange = (e) => {
@@ -75,8 +82,9 @@ const Auth = () => {
                   {isSignup && <Input name={"confirmPassword"} label={"Confirm password"} handleChange={handleChange}
                                       type={"password"}/>}
                </Grid>
-               <GoogleLogin  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} render={(renderProps) => (
-                  <Button className={classes.googleButton} style={{marginBottom:"1rem"}} color={"primary"} fullWidth onClick={renderProps.onClick}
+               <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} render={(renderProps) => (
+                  <Button className={classes.googleButton} style={{marginBottom: "1rem"}} color={"primary"} fullWidth
+                          onClick={renderProps.onClick}
                           disabled={renderProps.disabled} startIcon={<Icon/>} variant={"contained"}> Google Sign
                      In </Button>
                )}

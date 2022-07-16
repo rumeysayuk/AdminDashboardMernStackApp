@@ -26,7 +26,6 @@ const Navbar = () => {
       isClicked, setScreenSize, screenSize
    } = useStateContext();
    const {authData} = useSelector((state) => state?.auth)
-   console.log(authData)
    useEffect(() => {
       const handleResize = () => setScreenSize(window.innerWidth);
 
@@ -67,7 +66,7 @@ const Navbar = () => {
                   <p>
                      <span className="text-gray-400 text-14">Hi,</span>{' '}
                      <span className="text-gray-400 font-bold ml-1 text-14">
-                Michael
+                {authData?.user.name}
               </span>
                   </p>
                   <MdKeyboardArrowDown className="text-gray-400 text-14"/>
