@@ -13,8 +13,6 @@ const Button = ({icon, bgColor, color, bgHoverColor, size, text, borderRadius, w
       setIsClicked(initialState)
       dispatch(handleLogout())
       navigate("/auth")
-
-
    }
    return (
       <button
