@@ -30,8 +30,7 @@ const Auth = () => {
          })
       } else {
          apiAxios.post("/auth/login", formData).then(({data}) => {
-            console.log(data)
-            dispatch(handleAuth(data))
+            dispatch(handleAuth({token: data.access_token}))
             navigate("/")
          })
       }

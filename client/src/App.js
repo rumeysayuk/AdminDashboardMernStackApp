@@ -11,12 +11,14 @@ import {
 import './App.css';
 
 import {useStateContext} from './contexts/ContextProvider';
+import {useSelector} from "react-redux";
+import ProtectedRoute from "./helpers/ProtectedRoute";
 
 const App = () => {
    const {
       setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings
    } = useStateContext();
-   const user = JSON.parse(localStorage.getItem("profile"))
+   const { authData } = useSelector((state) => state.auth)
 
    useEffect(() => {
       const currentThemeColor = localStorage.getItem('colorMode');
@@ -59,8 +61,10 @@ const App = () => {
                      {themeSettings && (<ThemeSettings/>)}
                      <Routes>
                         {/*auth*/}
-                        <Route path="/auth" element={(!user ? <Auth/> : <Navigate to={"/"}/>)}/>
+                        <Route path="/auth" element={(!authData ? <Auth/> : <Navigate to={"/"}/>)}/>
                         {/* dashboard  */}
+                        {/*<ProtectedRoute component={<Ecommerce />} path="/" />*/}
+
                         <Route path="/" element={(<Ecommerce/>)}/>
                         <Route path="/ecommerce" element={(<Ecommerce/>)}/>
 

@@ -19,12 +19,11 @@ apiAxios.interceptors.response.use((response) => response, (error) => {
    } else {
       toast.error("Please try again later!")
    }
-   const unauthorized = error.response && error.response.status
-      && (error.response.status === 401 || error.response.status === 403)
-   if (unauthorized) {
+   const unauthorized = error.response && error.response.status && (error.response.status === 401 || error.response.status === 403)
+   if (unauthorized && !window.location.pathname.includes("/auth")) {
       localStorage.removeItem("token")
       setTimeout(() => {
-         window.location.replace(`${window.location.origin}/auth/login`)
+         window.location.replace(`${window.location.origin}/auth`)
       }, 1000)
    }
    return Promise.reject(error)

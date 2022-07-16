@@ -30,18 +30,7 @@ const register = asyncErrorWrapper(async (req, res, next) => {
 })
 
 const getHomePage = asyncErrorWrapper(async (req, res, next) => {
-   let returnObj = {}
-   if (isTokenIncluded(req)) {
-      let token = getAccessTokenFromHeader(req)
-      await jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
-         if (err) return next(new CustomError("Invalid Token", 401))
-         let user = await User.findById(decoded.sub)
-         if (!user) return next(new CustomError("Invalid Token", 401))
-         returnObj["user"] = user;
-      });
-   }
-   console.log(returnObj)
-   return res.status(200).json(returnObj)
+   return res.status(200).json({ success: true, user: req.user })
 })
 
 module.exports = {login, register, getHomePage}

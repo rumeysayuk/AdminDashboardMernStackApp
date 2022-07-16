@@ -8,14 +8,14 @@ export const layoutSlice = createSlice({
    },
    reducers: {
       handleAuth: (state, action) => {
-         console.log(state,action)
-         localStorage.setItem("profile", JSON.stringify(action.payload))
-         localStorage.setItem("token", action.payload.access_token)
-         state.authData = action.payload
+         localStorage.setItem("token", action.payload.token)
+         state.authData = action.payload.authData
+         state.token = action.payload.token
       },
       handleLogout: (state, action) => {
          localStorage.clear()
          state.authData = null
+         state.token = null
       },
    }
 })

@@ -1,11 +1,10 @@
 import React, {createContext, useContext, useState, useEffect} from "react";
 import apiAxios from "../api";
-import {handleAuth} from "../redux/auth";
-import {useDispatch} from "react-redux";
+import {handleAuth, handleLogout} from "../redux/auth";
+import {useDispatch, useSelector} from "react-redux";
 
 const StateContext = createContext()
 const initialState = {chat: false, cart: false, userProfile: false, notification: false}
-
 
 export const ContextProvider = ({children}) => {
    const [screenSize, setScreenSize] = useState(undefined);
@@ -15,6 +14,7 @@ export const ContextProvider = ({children}) => {
    const [activeMenu, setActiveMenu] = useState(true);
    const [isClicked, setIsClicked] = useState(initialState);
    const dispatch = useDispatch()
+   const {token, authData} = useSelector((state) => state.auth)
 
    const setMode = (e) => {
       setCurrentMode(e.target.value);
@@ -22,13 +22,12 @@ export const ContextProvider = ({children}) => {
    };
 
    useEffect(() => {
-      const token = localStorage.getItem("token")
-      if (token) {
-         apiAxios.get("/auth/getHomePage").then(({data}) => {
+      apiAxios.get("/auth/getHomePage").then(({data}) => {
+         if (data?.user && Object.keys(data.user).length > 0)
             dispatch(handleAuth({authData: data.user, token}))
-         })
-      }
-   }, [])
+         else dispatch(handleLogout())
+      })
+   }, [token])
 
    const setColor = (color) => {
       setCurrentColor(color);
