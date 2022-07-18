@@ -6,13 +6,12 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 import {Navbar, Footer, Sidebar, ThemeSettings, Auth} from './components';
 import {
    Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban,
-   Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor
+   Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor,ProfileDetail,Error
 } from './pages';
 import './App.css';
 
 import {useStateContext} from './contexts/ContextProvider';
 import {useSelector} from "react-redux";
-import ProtectedRoute from "./helpers/ProtectedRoute";
 
 const App = () => {
    const {
@@ -64,6 +63,7 @@ const App = () => {
                         <Route path="/auth" element={(!authData ? <Auth/> : <Navigate to={"/"}/>)}/>
                         {/* dashboard  */}
                         {/*<ProtectedRoute component={<Ecommerce />} path="/" />*/}
+                        <Route path="/profile-detail" element={(<ProfileDetail/>)}/>
 
                         <Route path="/" element={(<Ecommerce/>)}/>
                         <Route path="/ecommerce" element={(<Ecommerce/>)}/>
@@ -88,6 +88,7 @@ const App = () => {
                         <Route path="/color-mapping" element={<ColorMapping/>}/>
                         <Route path="/pyramid" element={<Pyramid/>}/>
                         <Route path="/stacked" element={<Stacked/>}/>
+                        <Route path="*" element={<Error/>}/>
 
                      </Routes>
                   </div>
