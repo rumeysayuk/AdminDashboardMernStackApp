@@ -30,7 +30,7 @@ const ProfileDetail = () => {
 
     const deleteAccount = () => {
         apiAxios.put(`/base/User/${profile._id}`, {data: {isBlocked: !profile.isBlocked}}).then(() => {
-            toast.success("DeletedAccount")
+            toast.success("Deleted Account")
             setTimeout(() => {
                 localStorage.removeItem("token")
                 window.location.href = "/"
@@ -71,6 +71,10 @@ const ProfileDetail = () => {
             </div>
             <form>
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label htmlFor="formFile" className="form-label inline-block mb-2 text-gray-700">Profile Image</label>
+                        <input className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" type="file" id="formFile"/>
+                    </div>
                     <div>
                         <label htmlFor="name"
                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">First
