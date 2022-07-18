@@ -18,7 +18,6 @@ const create = asyncErrorWrapper(async (req, res, next) => {
 
 const update = asyncErrorWrapper(async (req, res, next) => {
    let {service, id} = req.params
-   let user = req.user
    try {
       service = require("../models/" + service)
    } catch (e) {
@@ -27,12 +26,12 @@ const update = asyncErrorWrapper(async (req, res, next) => {
    let {data} = req.body
    if (!data) return next(new CustomError("Please send the record to be added with the data name ..!", 400))
    if (!id || !mongoose.Types.ObjectId.isValid(id)) return next(new CustomError("Invalid id! ", 400))
-   await service.updateOne({_id: id}, {$set: {...data, updatedBy: user._id}}).then(data => {
+   await service.updateOne({_id: id}, {$set: {...data, updatedBy: id}}).then(data => {
       return res.status(200).json({success: true})
    }).catch(err => {
       return next(new CustomError("Failed to update"))
    })
-   let createdData = await service.create({...data, createdBy: user._id})
+   let createdData = await service.create({...data, createdBy: id})
    return res.status(200).json({data: createdData, success: true})
 })
 
