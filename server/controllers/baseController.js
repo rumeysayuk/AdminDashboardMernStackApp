@@ -27,6 +27,7 @@ const update = asyncErrorWrapper(async (req, res, next) => {
    if (!data) return next(new CustomError("Please send the record to be added with the data name ..!", 400))
    if (!id || !mongoose.Types.ObjectId.isValid(id)) return next(new CustomError("Invalid id! ", 400))
    await service.updateOne({_id: id}, {$set: {...data, updatedBy: id}}).then(data => {
+      console.log(data)
       return res.status(200).json({success: true})
    }).catch(err => {
       return next(new CustomError("Failed to update"))
@@ -53,7 +54,7 @@ const deleteData = asyncErrorWrapper(async (req, res, next) => {
       await updated.save()
       return res.status(200).json({data: id, success: true})
    } else {
-      return next(new CustomError("Bu id'ye ait kayıt bulunamadı", 400))
+      return next(new CustomError("Dont find this user", 400))
    }
 })
 

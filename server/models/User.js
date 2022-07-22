@@ -40,10 +40,6 @@ const UserSchema = new Schema({
         type: String,
         default: "user"
     },
-    blocked: {
-        type: Boolean,
-        default: false
-    },
     lang: {
         type: String,
         default: "tr"

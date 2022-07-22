@@ -4,8 +4,6 @@ const User = require("../models/User")
 const {sendJwtToClient} = require("../helpers/authorization/tokenHelpers");
 const {EMAIL_UNIQUE_ERROR} = require("../constants/messages/messages");
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken");
-const {isTokenIncluded, getAccessTokenFromHeader} = require("../helpers/authorization/tokenHelpers");
 
 
 const login = asyncErrorWrapper(async (req, res, next) => {
@@ -29,7 +27,7 @@ const register = asyncErrorWrapper(async (req, res, next) => {
    sendJwtToClient(user, res);
 })
 
-const getHomePage = asyncErrorWrapper(async (req, res, next) => {
+const getHomePage = asyncErrorWrapper(async (req, res) => {
    return res.status(200).json({ success: true, user: req.user })
 })
 

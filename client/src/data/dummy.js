@@ -3364,7 +3364,7 @@ export const kanbanData = [
     Id: 'Task 11',
     Title: 'Task - 29016',
     Status: 'InProgress',
-    Summary: 'Fix cannot open user’s default database SQL error.',
+    Summary: 'Fix cannot open user’s default database SQL errors.',
     Priority: 'Critical',
     Type: 'Bug',
     Tags: 'Database,Sql2008',

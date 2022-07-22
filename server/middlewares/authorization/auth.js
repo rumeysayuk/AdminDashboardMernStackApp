@@ -2,8 +2,9 @@ const {isTokenIncluded, getAccessTokenFromHeader} = require("../../helpers/autho
 const jwt = require("jsonwebtoken");
 const CustomError = require("../../helpers/error/CustomError");
 const User = require("../../models/User");
+const asyncErrorWrapper = require("express-async-handler");
 
-const getAccessToRoute = async (req, res, next) => {
+const getAccessToRoute =asyncErrorWrapper( async (req, res, next) => {
    if (!isTokenIncluded(req)) return next(new CustomError("Please first login", 401))
    let token = getAccessTokenFromHeader(req)
    await jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
@@ -13,6 +14,6 @@ const getAccessToRoute = async (req, res, next) => {
       req.user = user;
       next();
    });
-}
+})
 
 module.exports = {getAccessToRoute}
