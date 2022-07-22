@@ -7,6 +7,7 @@ import {handleAuth} from "../redux/auth";
 import {useNavigate} from "react-router-dom";
 import {useStateContext} from "../contexts/ContextProvider";
 import {Button, Popconfirm} from 'antd';
+import {EditOutlined} from "@material-ui/icons";
 
 const ProfileDetail = () => {
     const {authData} = useSelector(state => state.auth)
@@ -25,12 +26,12 @@ const ProfileDetail = () => {
     const deleteAccount = (e) => {
         e.preventDefault()
         apiAxios.put(`/base/User/${profile._id}`, {data: {isBlocked: !profile.isBlocked}}).then(() => {
-            toast.success("Deleted Account")
+            toast.success("Deleted Account Is Successfully")
             setTimeout(() => {
                 localStorage.removeItem("token")
                 window.location.href = "/auth"
             }, 1000)
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err)
         })
     }
@@ -40,7 +41,7 @@ const ProfileDetail = () => {
         apiAxios.put(`/base/User/${userId}`, {data: profile}).then(() => {
             dispatch(handleAuth({authData: profile, token: token}))
         }).catch(e => {
-            console.log(e)
+            toast.error(e.response.data.message)
         })
     }
 
@@ -53,6 +54,19 @@ const ProfileDetail = () => {
             }
         }, 1000)
     }, [])
+    console.log(authData)
+
+    const updateProfileImage = (e) => {
+        if (e.target.files?.length > 0) {
+            const formData = new FormData();
+            formData.append("image", e.target.files[0]);
+            apiAxios.post("/upload", formData).then(({data}) => {
+                setProfile({...profile, profile_img: data?.url})
+            }).catch(err=>console.log("err",err))
+        } else {
+            toast.error("Image not selected")
+        }
+    }
 
     if (!profile || !authData) return <div
         className="flex w-full justify-center align-middle h-full">Loading...</div>;
@@ -69,7 +83,7 @@ const ProfileDetail = () => {
                         visible={visible}
                         onConfirm={deleteAccount}
                         onCancel={() => setVisible(false)}>
-                        <Button type="primary" onClick={showPopConfirm}
+                        <Button type="danger" onClick={showPopConfirm}
                                 className="ml-3 h-10 text-md align-middle justify-center flex rounded-lg hover:bg-light-gray mt-5 mr-5">
                             Delete my account
                         </Button>
@@ -78,13 +92,15 @@ const ProfileDetail = () => {
             </div>
             <form>
                 <div className="grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <label htmlFor="formFile"
-                               className="form-label inline-block mb-2 text-gray-700 dark:text-gray-300">Profile
-                            Image</label>
-                        <input
-                            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            type="file" id="formFile"/>
+                    <div className="w-full lg:w-1/5 p-2 relative flex items-center justify-center bg-white shadow-md">
+                        <label htmlFor="file" className="w-full flex items-center justify-center">
+                            <img id="showImage" className="w-full items-center justify-center border mt-6"
+                                 style={{maxWidth: 400, maxHeight: 400}} src={authData?.profile_img[0] ||
+                                "https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png"} alt=""/>
+                            <EditOutlined className="absolute top-0 right-0 m-2 text-green-600" style={{fontSize: 20}}/>
+                            <input type="file" id="file" className="hidden" accept=".jpeg, .jpg, .png"
+                                   onChange={updateProfileImage}/>
+                        </label>
                     </div>
                     <div>
                         <label htmlFor="name"

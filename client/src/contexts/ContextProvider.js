@@ -14,7 +14,7 @@ export const ContextProvider = ({children}) => {
    const [activeMenu, setActiveMenu] = useState(true);
    const [isClicked, setIsClicked] = useState(initialState);
    const dispatch = useDispatch()
-   const {token, authData} = useSelector((state) => state.auth)
+   const {token} = useSelector((state) => state.auth)
 
    const setMode = (e) => {
       setCurrentMode(e.target.value);
