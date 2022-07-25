@@ -54,7 +54,6 @@ const ProfileDetail = () => {
             }
         }, 1000)
     }, [])
-    console.log(authData)
 
     const updateProfileImage = (e) => {
         if (e.target.files?.length > 0) {
@@ -95,7 +94,7 @@ const ProfileDetail = () => {
                     <div className="w-full lg:w-1/5 p-2 relative flex items-center justify-center bg-white shadow-md">
                         <label htmlFor="file" className="w-full flex items-center justify-center">
                             <img id="showImage" className="w-full items-center justify-center border mt-6"
-                                 style={{maxWidth: 400, maxHeight: 400}} src={authData?.profile_img[0] ||
+                                 style={{maxWidth: 400, maxHeight: 400}} src={authData ||
                                 "https://cdn0.iconfinder.com/data/icons/set-ui-app-android/32/8-512.png"} alt=""/>
                             <EditOutlined className="absolute top-0 right-0 m-2 text-green-600" style={{fontSize: 20}}/>
                             <input type="file" id="file" className="hidden" accept=".jpeg, .jpg, .png"
