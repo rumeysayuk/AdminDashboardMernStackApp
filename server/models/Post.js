@@ -33,6 +33,6 @@ const PostSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Users",
     }
-})
+},{ versionKey: false })
 
 module.exports = mongoose.model("Posts", PostSchema);

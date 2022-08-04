@@ -103,7 +103,7 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     }
-})
+},{ versionKey: false })
 
 UserSchema.methods.getResetPasswordTokenFromUser = function () {
     const randomHexString = crypto.randomBytes(15).toString("hex")

@@ -5,7 +5,7 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 import {ToastContainer} from "react-toastify";
 import {Navbar, Footer, Sidebar, ThemeSettings, Auth} from './components';
 import {
-   Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban,
+   Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban,Chat,
    Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor,ProfileDetail,Error
 } from './pages';
 import './App.css';
@@ -26,7 +26,7 @@ const App = () => {
          setCurrentColor(currentThemeColor);
          setCurrentMode(currentThemeMode);
       }
-   }, []);
+   }, [setCurrentColor, setCurrentMode]);
 
    return (
       <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -73,6 +73,7 @@ const App = () => {
                         <Route path="/orders" element={<Orders/>}/>
                         <Route path="/employees" element={<Employees/>}/>
                         <Route path="/customers" element={<Customers/>}/>
+                        <Route path="/chat" element={<Chat/>}/>
 
                         {/* apps  */}
                         <Route path="/kanban" element={<Kanban/>}/>

@@ -15,6 +15,6 @@ const PyramidSchema = new Schema({
       required: [true, requiredError("Text")],
    },
 
-});
+},{ versionKey: false });
 
 module.exports = mongoose.model("Pyramid", PyramidSchema);

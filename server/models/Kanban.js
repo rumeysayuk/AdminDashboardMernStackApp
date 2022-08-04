@@ -31,6 +31,6 @@ const KanbanSchema = new Schema({
    rankId: {String},
    color: {String},
    className: {String},
-});
+},{ versionKey: false });
 
 module.exports = mongoose.model("Pyramid", KanbanSchema);
