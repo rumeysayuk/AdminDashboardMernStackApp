@@ -29,7 +29,7 @@ router.use("/pdfupload", pdfUpload.single("file"), (req, res, next) => {
 
 router.use("/auth", authRoutes);
 router.use("/posts", postRoutes);
-router.use("/chatrooms",chatroomRoutes)
+router.use("/chatroom",chatroomRoutes)
 router.post("/base/:service", getAccessToRoute, create)
 router.get("/base/:service", getAll)
 router.get("/base/:service/:id", getById)

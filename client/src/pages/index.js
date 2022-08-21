@@ -17,3 +17,5 @@ export { default as Pie } from './Charts/Pie';
 export { default as Pyramid } from './Charts/Pyramid';
 export { default as Stacked } from './Charts/Stacked';
 export { default as Chat } from './Chat/Chat';
+export { default as Chatroom } from './Chat/Chatroom';
+export { default as CreateChatroomModal } from './Chat/ChatroomCreate';

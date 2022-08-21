@@ -6,6 +6,14 @@ const chatroomSchema = new mongoose.Schema({
         match: /^[A-Za-z\s+$]/,
         required: "Name is required!",
     },
+    createdAt: {
+         type: Date,
+         default: Date.now,
+    },
+    creator: {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "User",
+    }
 }, { versionKey: false });
 
 module.exports = mongoose.model("Chatrooms", chatroomSchema);

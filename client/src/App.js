@@ -5,8 +5,8 @@ import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 import {ToastContainer} from "react-toastify";
 import {Navbar, Footer, Sidebar, ThemeSettings, Auth} from './components';
 import {
-   Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban,Chat,
-   Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor,ProfileDetail,Error
+   Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Chat,
+   Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor, ProfileDetail, Error, Chatroom
 } from './pages';
 import './App.css';
 
@@ -74,6 +74,7 @@ const App = () => {
                         <Route path="/employees" element={<Employees/>}/>
                         <Route path="/customers" element={<Customers/>}/>
                         <Route path="/chat" element={<Chat/>}/>
+                        <Route path="/chatDetail/:id" element={<Chatroom/>}/>
 
                         {/* apps  */}
                         <Route path="/kanban" element={<Kanban/>}/>

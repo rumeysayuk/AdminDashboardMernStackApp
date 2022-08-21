@@ -7,10 +7,8 @@ import {LockOutlined} from "@material-ui/icons";
 import Input from "./Input";
 import Icon from "./icon";
 import {useNavigate} from "react-router-dom";
-import * as api from "../../api/index"
 import {handleAuth} from "../../redux/auth";
 import apiAxios from "../../api/index";
-import {toast} from "react-toastify";
 
 const initialState = {name: "", lastname: "", email: "", password: "", confirmPassword: ""}
 const Auth = () => {
