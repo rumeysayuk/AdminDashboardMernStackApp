@@ -76,8 +76,6 @@ const ChatPage = () => {
                {openPage && (<Chatroom chatroomName={openPage}/>)}
             </div>
          </div>
-
-
       </div>
    );
 };

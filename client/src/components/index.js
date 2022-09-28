@@ -14,3 +14,4 @@ export {default as LineChart} from './Charts/LineChart';
 export {default as SparkLine} from './Charts/SparkLine';
 export {default as Stacked} from './Charts/Stacked';
 export {default as Auth} from "./Auth/Auth"
+export {default as Asd} from "./asd"

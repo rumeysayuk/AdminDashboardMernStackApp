@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import {FiSettings} from 'react-icons/fi';
 import {TooltipComponent} from '@syncfusion/ej2-react-popups';
 import {ToastContainer} from "react-toastify";
-import {Navbar, Footer, Sidebar, ThemeSettings, Auth} from './components';
+import {Navbar, Footer, Sidebar, ThemeSettings, Auth,Asd} from './components';
 import {
    Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Chat,
    Line, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor, ProfileDetail, Error, Chatroom
@@ -81,6 +81,7 @@ const App = () => {
                         <Route path="/editor" element={<Editor/>}/>
                         <Route path="/calendar" element={<Calendar/>}/>
                         <Route path="/color-picker" element={<ColorPicker/>}/>
+                        <Route path={"/asd"} element={<Asd/>}/>
 
                         {/* charts  */}
                         <Route path="/line" element={<Line/>}/>
